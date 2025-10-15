@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cyber Crime Portal — Ministry of Home Affairs</title>
+  <style>
+    :root{
+      --bg:#f1f5f9;
+      --card:#ffffff;
+      --deep:#0958d9;
+      --deep-2:#1e64ff;
+      --muted:#6b7280;
+      --accent:#e6eefc;
+      --radius:14px;
+      --card-width:360px;
+      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;background:var(--bg);margin:0}
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 16px;
+      box-sizing:border-box;
+    }
+
+    .card{
+      width:var(--card-width);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow: 0 10px 30px rgba(16,24,40,0.08), 0 2px 6px rgba(16,24,40,0.04);
+      overflow:hidden;
+      border:1px solid rgba(15,23,42,0.03);
+    }
+
+    /* header */
+    .card .header{
+      background: linear-gradient(180deg, var(--deep-2) 0%, var(--deep) 100%);
+      color: white;
+      padding:22px 20px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .shield{
+      width:44px;height:44px;border-radius:10px;
+      background: rgba(255,255,255,0.12);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow: inset 0 -2px 6px rgba(255,255,255,0.02);
+      flex: 0 0 44px;
+    }
+    .shield svg{width:22px;height:22px;fill: none; stroke: #fff; stroke-width:1.6}
+    .brand{
+      line-height:1;
+    }
+    .brand .title{font-weight:700;font-size:16px;letter-spacing:-0.2px}
+    .brand .subtitle{font-size:12px;opacity:0.9;margin-top:2px}
+
+    /* body */
+    .card .body{
+      padding:22px;
+      color:#111827;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+      margin-bottom:18px;
+    }
+
+    label{display:block;font-size:13px;color:#374151;margin-bottom:8px;font-weight:600}
+    .field{
+      display:block;
+      width:100%;
+      box-sizing:border-box;
+      border-radius:8px;
+      border:1px solid #e6e9ef;
+      padding:12px 14px;
+      font-size:14px;
+      outline:none;
+      transition:box-shadow .12s, border-color .12s;
+      background: #fbfdff;
+      color: #0f172a;
+    }
+    .field:focus{
+      border-color: rgba(30,64,255,0.9);
+      box-shadow: 0 6px 18px rgba(30,64,255,0.08);
+    }
+    .spacer{height:12px}
+
+    .btn{
+      margin-top:12px;
+      display:inline-block;
+      width:100%;
+      padding:12px 16px;
+      border-radius:10px;
+      border:none;
+      font-weight:700;
+      font-size:15px;
+      color:white;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)), linear-gradient(180deg,#b7c3d9,#8f9fbd);
+      background-blend-mode:overlay;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(12, 24, 56, 0.08);
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, #8faef9, #5679f0);
+      box-shadow: 0 8px 24px rgba(46, 75, 187, 0.18);
+    }
+    .btn:disabled{
+      opacity:0.65;cursor:not-allowed;
+    }
+
+    .divider{
+      height:1px;background:#f3f4f6;margin:18px 0;border-radius:2px;
+    }
+
+    .small-muted{
+      font-size:12px;color:var(--muted);line-height:1.4;text-align:center;padding:6px 10px 0;
+    }
+
+    .footer{
+      padding:12px 20px 18px;text-align:center;color:#9ca3af;font-size:12px;
+    }
+
+    /* responsive tiny */
+    @media (max-width:420px){
+      .card{width:92%}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card" role="main" aria-labelledby="title">
+      <header class="header">
+        <div class="shield" aria-hidden="true">
+          <!-- shield + check svg -->
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l6 3v5c0 5-3 9-6 11-3-2-6-6-6-11V5l6-3z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+
+        <div class="brand">
+          <div id="title" class="title">Cyber Crime Portal</div>
+          <div class="subtitle">Ministry of Home Affairs</div>
+        </div>
+      </header>
+
+      <div class="body">
+        <p class="lead">Please provide your details to access your complaint report. Your information will be verified for security purposes.</p>
+
+        <form id="reportForm" action="submit.php" method="POST" novalidate>
+          <div>
+            <label for="name">Full Name</label>
+            <input id="name" name="name" class="field" type="text" placeholder="Enter your full name" required />
+          </div>
+
+          <div class="spacer"></div>
+
+          <div>
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" class="field" type="tel" inputmode="tel" placeholder="Enter your phone number" pattern="[0-9+()\s\-]{7,20}" required />
+          </div>
+
+          <div class="spacer"></div>
+
+          <button id="submitBtn" class="btn primary" type="submit">Access Report</button>
+        </form>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="small-muted">
+          This portal is operated by the Government of India. All submissions are securely recorded and monitored for official purposes.
+        </div>
+      </div>
+
+      <div class="footer">© 2000 Government of India. All rights reserved.</div>
+    </main>
+  </div>
+
+  <script>
+    // small client-side UX: disable the button on submit
+    const form = document.getElementById('reportForm');
+    const btn = document.getElementById('submitBtn');
+    form.addEventListener('submit', (e) => {
+      // simple validation fallback
+      if (!form.checkValidity()) {
+        return; // let browser show errors
+      }
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+    });
+  </script>
+</body>
+</html>
